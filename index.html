@@ -41,11 +41,15 @@
         }
 
         .logo {
-            font-family: 'Space Mono', monospace;
-            font-size: 1.4rem;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            color: #0f0f0f;
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 190px;
+            height: auto;
+            display: block;
         }
 
         .header-right {
@@ -349,6 +353,24 @@
             font-weight: 300;
         }
 
+        .service-action {
+            margin-top: 1.4rem;
+            border: 1px solid #0f0f0f;
+            background: #0f0f0f;
+            color: white;
+            border-radius: 8px;
+            padding: 0.75rem 1rem;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .service-action:hover {
+            background: white;
+            color: #0f0f0f;
+        }
+
         #why-us {
             background: white;
         }
@@ -485,6 +507,32 @@
             box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
         }
 
+        .contact-form button:disabled {
+            cursor: wait;
+            opacity: 0.7;
+            transform: none;
+        }
+
+        .form-status {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.9rem 1rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        .form-status.success {
+            display: block;
+            background: #dcfce7;
+            color: #14532d;
+        }
+
+        .form-status.error {
+            display: block;
+            background: #fee2e2;
+            color: #7f1d1d;
+        }
+
         .languages {
             background: #f5f5f5;
             padding: 2rem;
@@ -582,10 +630,12 @@
         }
     </style>
 </head>
-<body>
+<body id="top">
     <header>
         <div class="header-container">
-            <div class="logo">ARH</div>
+            <a class="logo" href="#top" aria-label="Assistans Runt Hörnan AB">
+                <img src="logo.png" alt="Assistans Runt Hörnan AB">
+            </a>
             <div class="header-right">
                 <nav>
                     <a href="#about" data-sv="Om Oss" data-en="About" data-es="Acerca de" data-ar="معلومات">Om Oss</a>
@@ -612,8 +662,8 @@
             <h1 data-sv="Personlig Assistans Med Omtanke" data-en="Personal Care With Dignity" data-es="Cuidado Personal Con Dignidad" data-ar="الرعاية الشخصية بكرامة">Personlig Assistans Med Omtanke</h1>
             <p data-sv="Skräddarsydd assistans för barn, vuxna och familjer. Vi fokuserar på att ge det stöd och den värdighet du förtjänar." data-en="Tailored assistance for children, adults and families. We focus on giving you the support and dignity you deserve." data-es="Asistencia personalizada para niños, adultos y familias. Nos enfocamos en brindarle el apoyo y la dignidad que merece." data-ar="مساعدة مخصصة للأطفال والبالغين والعائلات. نركز على إعطائك الدعم والكرامة التي تستحقها.">Skräddarsydd assistans för barn, vuxna och familjer. Vi fokuserar på att ge det stöd och den värdighet du förtjänar.</p>
             <div class="cta-buttons">
-                <button class="btn btn-primary" onclick="scrollTo('contact')" data-sv="Kontakta Oss" data-en="Contact Us" data-es="Contáctenos" data-ar="اتصل بنا">Kontakta Oss</button>
-                <button class="btn btn-secondary" onclick="scrollTo('services')" data-sv="Våra Tjänster" data-en="Our Services" data-es="Nuestros Servicios" data-ar="خدماتنا">Våra Tjänster</button>
+                <button class="btn btn-primary" onclick="scrollToSection('contact')" data-sv="Kontakta Oss" data-en="Contact Us" data-es="Contáctenos" data-ar="اتصل بنا">Kontakta Oss</button>
+                <button class="btn btn-secondary" onclick="scrollToSection('services')" data-sv="Våra Tjänster" data-en="Our Services" data-es="Nuestros Servicios" data-ar="خدماتنا">Våra Tjänster</button>
             </div>
         </div>
     </section>
@@ -663,36 +713,42 @@
                 <span class="service-label" data-sv="Dagligt Stöd" data-en="Daily Support" data-es="Apoyo Diario" data-ar="الدعم اليومي">Dagligt Stöd</span>
                 <h3 data-sv="Personlig Assistans" data-en="Personal Assistance" data-es="Asistencia Personal" data-ar="مساعدة شخصية">Personlig Assistans</h3>
                 <p data-sv="Stöd med dagliga uppgifter, personlig hygien, kläder och aktiviteter som hjälper dig att behålla självständighet och värdighet." data-en="Support with daily tasks, personal hygiene, clothing and activities to help you maintain independence and dignity." data-es="Apoyo con tareas diarias, higiene personal, ropa y actividades para ayudarlo a mantener la independencia y la dignidad." data-ar="الدعم في المهام اليومية والنظافة الشخصية والملابس والأنشطة التي تساعدك على الحفاظ على الاستقلالية والكرامة.">Stöd med dagliga uppgifter, personlig hygien, kläder och aktiviteter som hjälper dig att behålla självständighet och värdighet.</p>
+                <button class="service-action" type="button" onclick="selectService(this)" data-sv="Fråga om tjänsten" data-en="Ask about this service" data-es="Preguntar por este servicio" data-ar="اسأل عن هذه الخدمة">Fråga om tjänsten</button>
             </div>
 
             <div class="service-card">
                 <span class="service-label" data-sv="Hemvård" data-en="Home Care" data-es="Cuidado del Hogar" data-ar="رعاية المنزل">Hemvård</span>
                 <h3 data-sv="Hushållsarbete" data-en="Household Work" data-es="Tareas del Hogar" data-ar="أعمال منزلية">Hushållsarbete</h3>
                 <p data-sv="Städning, tvätt, organisering och ordning hemma för att skapa en trygg och vacker miljö för dig och din familj." data-en="Cleaning, laundry, organization and tidiness at home to create a safe and beautiful environment for you and your family." data-es="Limpieza, lavandería, organización y orden en el hogar para crear un ambiente seguro y hermoso para usted y su familia." data-ar="التنظيف والغسيل والتنظيم والترتيب في المنزل لخلق بيئة آمنة وجميلة لك ولعائلتك.">Städning, tvätt, organisering och ordning hemma för att skapa en trygg och vacker miljö för dig och din familj.</p>
+                <button class="service-action" type="button" onclick="selectService(this)" data-sv="Fråga om tjänsten" data-en="Ask about this service" data-es="Preguntar por este servicio" data-ar="اسأل عن هذه الخدمة">Fråga om tjänsten</button>
             </div>
 
             <div class="service-card">
                 <span class="service-label" data-sv="Sällskap" data-en="Companionship" data-es="Compañía" data-ar="الرفقة">Sällskap</span>
                 <h3 data-sv="Sällskap & Socialt Stöd" data-en="Companionship & Social Support" data-es="Compañía y Apoyo Social" data-ar="الرفقة والدعم الاجتماعي">Sällskap & Socialt Stöd</h3>
                 <p data-sv="Bygga meningsfulla relationer genom samtal, aktiviteter och emotionell support som förbättrar livskvaliteten." data-en="Build meaningful relationships through conversation, activities and emotional support that improves quality of life." data-es="Construir relaciones significativas a través de conversación, actividades y apoyo emocional que mejora la calidad de vida." data-ar="بناء علاقات ذات معنى من خلال المحادثة والأنشطة والدعم العاطفي الذي يحسن من جودة الحياة.">Bygga meningsfulla relationer genom samtal, aktiviteter och emotionell support som förbättrar livskvaliteten.</p>
+                <button class="service-action" type="button" onclick="selectService(this)" data-sv="Fråga om tjänsten" data-en="Ask about this service" data-es="Preguntar por este servicio" data-ar="اسأل عن هذه الخدمة">Fråga om tjänsten</button>
             </div>
 
             <div class="service-card">
                 <span class="service-label" data-sv="Kommunikation" data-en="Communication" data-es="Comunicación" data-ar="التواصل">Kommunikation</span>
                 <h3 data-sv="Språklig Tillgänglighet" data-en="Language Accessibility" data-es="Accesibilidad del Idioma" data-ar="إمكانية الوصول إلى اللغة">Språklig Tillgänglighet</h3>
                 <p data-sv="Vi kommunicerar flytande på Svenska, Engelska, Spanska och Arabiska för att säkerställa total förståelse och inkludering." data-en="We communicate fluently in Swedish, English, Spanish and Arabic to ensure complete understanding and inclusion." data-es="Nos comunicamos con fluidez en sueco, inglés, español y árabe para garantizar una comprensión e inclusión total." data-ar="نحن نتواصل بطلاقة باللغة السويدية والإنجليزية والإسبانية والعربية لضمان الفهم والشمول الكامل.">Vi kommunicerar flytande på Svenska, Engelska, Spanska och Arabiska för att säkerställa total förståelse och inkludering.</p>
+                <button class="service-action" type="button" onclick="selectService(this)" data-sv="Fråga om tjänsten" data-en="Ask about this service" data-es="Preguntar por este servicio" data-ar="اسأل عن هذه الخدمة">Fråga om tjänsten</button>
             </div>
 
             <div class="service-card">
                 <span class="service-label" data-sv="Nödsituationer" data-en="Emergency" data-es="Emergencia" data-ar="حالة الطوارئ">Nödsituationer</span>
                 <h3 data-sv="24/7 Stöd" data-en="24/7 Support" data-es="Soporte 24/7" data-ar="دعم 24/7">24/7 Stöd</h3>
                 <p data-sv="Kontoret är öppet mån-fre 08:00-17:00, men vi har nödhantering tillgänglig dygnet runt för brådskande situationer." data-en="Office open Monday to Friday 08:00 to 17:00, but we have emergency handling available 24/7 for urgent situations." data-es="Oficina abierta de lunes a viernes de 08:00 a 17:00, pero tenemos manejo de emergencias disponible 24/7 para situaciones urgentes." data-ar="المكتب مفتوح من الاثنين إلى الجمعة من 08:00 إلى 17:00، لكن لدينا معالجة طوارئ متاحة 24/7 للحالات العاجلة.">Kontoret är öppet mån-fre 08:00-17:00, men vi har nödhantering tillgänglig dygnet runt för brådskande situationer.</p>
+                <button class="service-action" type="button" onclick="selectService(this)" data-sv="Fråga om tjänsten" data-en="Ask about this service" data-es="Preguntar por este servicio" data-ar="اسأل عن هذه الخدمة">Fråga om tjänsten</button>
             </div>
 
             <div class="service-card">
                 <span class="service-label" data-sv="Måltider" data-en="Meals" data-es="Comidas" data-ar="الوجبات">Måltider</span>
                 <h3 data-sv="Måltidsförberedelser" data-en="Meal Preparation" data-es="Preparación de Comidas" data-ar="تحضير الوجبات">Måltidsförberedelser</h3>
                 <p data-sv="Hjälp med kostplanering, matinköp, matlagning och näringsväg ledning efter dina speciella önskemål och behov." data-en="Help with meal planning, grocery shopping, cooking and nutritional guidance based on your special wishes and needs." data-es="Ayuda con planificación de comidas, compras de alimentos, cocina y orientación nutricional según sus deseos y necesidades especiales." data-ar="مساعدة في التخطيط الغذائي والتسوق البقالي والطهي والإرشادات الغذائية بناءً على رغباتك واحتياجاتك الخاصة.">Hjälp med kostplanering, matinköp, matlagning och näringsväg ledning efter dina speciella önskemål och behov.</p>
+                <button class="service-action" type="button" onclick="selectService(this)" data-sv="Fråga om tjänsten" data-en="Ask about this service" data-es="Preguntar por este servicio" data-ar="اسأل عن هذه الخدمة">Fråga om tjänsten</button>
             </div>
         </div>
     </section>
@@ -762,11 +818,13 @@
                 </div>
 
                 <form class="contact-form" onsubmit="handleSubmit(event)">
-                    <input type="text" placeholder="Ditt namn" data-sv="Ditt namn" data-en="Your name" data-es="Tu nombre" data-ar="اسمك" required>
-                    <input type="email" placeholder="Din e-post" data-sv="Din e-post" data-en="Your email" data-es="Tu correo electrónico" data-ar="بريدك الإلكتروني" required>
-                    <input type="tel" placeholder="Din telefon" data-sv="Din telefon" data-en="Your phone" data-es="Tu teléfono" data-ar="هاتفك">
-                    <textarea placeholder="Berätta om dina behov..." data-sv="Berätta om dina behov..." data-en="Tell us about your needs..." data-es="Cuéntanos sobre tus necesidades..." data-ar="أخبرنا عن احتياجاتك..."></textarea>
-                    <button type="submit" data-sv="Skicka Meddelande" data-en="Send Message" data-es="Enviar Mensaje" data-ar="إرسال الرسالة">Skicka Meddelande</button>
+                    <input type="text" name="name" autocomplete="name" placeholder="Ditt namn" data-sv="Ditt namn" data-en="Your name" data-es="Tu nombre" data-ar="اسمك" required>
+                    <input type="email" name="email" autocomplete="email" placeholder="Din e-post" data-sv="Din e-post" data-en="Your email" data-es="Tu correo electrónico" data-ar="بريدك الإلكتروني" required>
+                    <input type="tel" name="phone" autocomplete="tel" placeholder="Din telefon" data-sv="Din telefon" data-en="Your phone" data-es="Tu teléfono" data-ar="هاتفك">
+                    <input type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;height:1px;width:1px;opacity:0;">
+                    <textarea name="message" placeholder="Berätta om dina behov..." data-sv="Berätta om dina behov..." data-en="Tell us about your needs..." data-es="Cuéntanos sobre tus necesidades..." data-ar="أخبرنا عن احتياجاتك..." required></textarea>
+                    <button type="submit" data-default-sv="Skicka Meddelande" data-default-en="Send Message" data-default-es="Enviar Mensaje" data-default-ar="إرسال الرسالة" data-loading-sv="Skickar..." data-loading-en="Sending..." data-loading-es="Enviando..." data-loading-ar="جار الإرسال..." data-sv="Skicka Meddelande" data-en="Send Message" data-es="Enviar Mensaje" data-ar="إرسال الرسالة">Skicka Meddelande</button>
+                    <div class="form-status" role="status" aria-live="polite"></div>
                 </form>
             </div>
         </div>
@@ -807,7 +865,7 @@
             nav.classList.toggle('active');
         }
 
-        function scrollTo(section) {
+        function scrollToSection(section) {
             const element = document.getElementById(section);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth' });
@@ -816,14 +874,74 @@
             }
         }
 
-        function handleSubmit(event) {
+        function selectService(button) {
+            const service = button.closest('.service-card').querySelector('h3').textContent.trim();
+            const textarea = document.querySelector('.contact-form textarea[name="message"]');
+            const templates = {
+                sv: 'Hej, jag vill gärna veta mer om ' + service + '.',
+                en: 'Hello, I would like to know more about ' + service + '.',
+                es: 'Hola, me gustaría saber más sobre ' + service + '.',
+                ar: 'مرحباً، أود معرفة المزيد عن ' + service + '.'
+            };
+
+            if (textarea && textarea.value.trim() === '') {
+                textarea.value = templates[currentLang] || templates.sv;
+            }
+
+            scrollToSection('contact');
+            setTimeout(() => {
+                const firstEmpty = document.querySelector('.contact-form input[name="name"]');
+                if (firstEmpty) {
+                    firstEmpty.focus();
+                }
+            }, 450);
+        }
+
+        function setFormStatus(form, type, text) {
+            const status = form.querySelector('.form-status');
+            status.className = 'form-status ' + type;
+            status.textContent = text;
+        }
+
+        async function handleSubmit(event) {
             event.preventDefault();
-            const msg = currentLang === 'sv' ? 'Tack för ditt meddelande! Vi kontaktar dig snart.' : 
-                       currentLang === 'en' ? 'Thank you for your message! We will contact you soon.' :
-                       currentLang === 'es' ? 'Gracias por tu mensaje. Nos pondremos en contacto pronto.' :
-                       'شكراً على رسالتك! سنتصل بك قريباً.';
-            alert(msg);
-            event.target.reset();
+            const form = event.target;
+            const button = form.querySelector('button[type="submit"]');
+            const successMsg = currentLang === 'sv' ? 'Tack för ditt meddelande. Vi har skickat en bekräftelse till din e-post och återkommer snart.' :
+                            currentLang === 'en' ? 'Thank you for your message. We sent a confirmation to your email and will get back to you soon.' :
+                            currentLang === 'es' ? 'Gracias por tu mensaje. Enviamos una confirmación a tu correo y te contactaremos pronto.' :
+                            'شكراً على رسالتك. أرسلنا تأكيداً إلى بريدك الإلكتروني وسنتواصل معك قريباً.';
+            const errorMsg = currentLang === 'sv' ? 'Meddelandet kunde inte skickas just nu. Försök igen senare eller ring oss.' :
+                          currentLang === 'en' ? 'The message could not be sent right now. Please try again later or call us.' :
+                          currentLang === 'es' ? 'El mensaje no se pudo enviar ahora. Inténtalo más tarde o llámanos.' :
+                          'تعذر إرسال الرسالة الآن. يرجى المحاولة لاحقاً أو الاتصال بنا.';
+
+            button.disabled = true;
+            button.textContent = button.getAttribute('data-loading-' + currentLang) || 'Sending...';
+            setFormStatus(form, '', '');
+
+            try {
+                const response = await fetch('contact.php', {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                const result = await response.json().catch(() => ({ ok: false }));
+
+                if (!response.ok || !result.ok) {
+                    throw new Error(result.message || 'Send failed');
+                }
+
+                form.reset();
+                setFormStatus(form, 'success', successMsg);
+            } catch (error) {
+                setFormStatus(form, 'error', errorMsg);
+            } finally {
+                button.disabled = false;
+                button.textContent = button.getAttribute('data-default-' + currentLang) || 'Send Message';
+            }
         }
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
