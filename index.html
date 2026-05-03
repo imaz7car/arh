@@ -921,7 +921,10 @@
             setFormStatus(form, '', '');
 
             try {
-                const response = await fetch('contact.php', {
+                const endpoint = window.location.protocol === 'file:'
+                    ? 'http://127.0.0.1:8082/contact.php'
+                    : 'contact.php';
+                const response = await fetch(endpoint, {
                     method: 'POST',
                     body: new FormData(form),
                     headers: {

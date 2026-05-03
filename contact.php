@@ -2,6 +2,9 @@
 declare(strict_types=1);
 
 header('Content-Type: application/json; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, OPTIONS');
+header('Access-Control-Allow-Headers: Accept, Content-Type');
 
 const SMTP_HOST = 'smtp.strato.com';
 const SMTP_PORT = 587;
@@ -159,6 +162,10 @@ function email_shell(string $title, string $body): string
         . '</td></tr><tr><td style="padding:22px 34px;background:#111111;color:#ffffff;font-size:14px;line-height:1.6;">'
         . '<strong>Assistans Runt Hornan AB</strong><br>Tvärvägen 5, 169 36 Solna<br>info@assistans-r-h.se | +46 8 760 19 31'
         . '</td></tr></table></td></tr></table></body></html>';
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    json_response(true, 'OK');
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
