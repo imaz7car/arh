@@ -932,16 +932,25 @@
                         'Accept': 'application/json'
                     }
                 });
-                const result = await response.json().catch(() => ({ ok: false }));
+                const result = await response.json().catch(() => ({}));
+                const sent = response.ok && (
+                    result.ok === true ||
+                    result.success === true ||
+                    result.success === 'true' ||
+                    result.message === 'The form was submitted successfully.'
+                );
 
-                if (!response.ok || !result.ok) {
+                if (!sent) {
                     throw new Error(result.message || 'Send failed');
                 }
 
                 form.reset();
                 setFormStatus(form, 'success', successMsg);
             } catch (error) {
-                setFormStatus(form, 'error', errorMsg);
+                const details = error && error.message && error.message !== 'Send failed'
+                    ? ' ' + error.message
+                    : '';
+                setFormStatus(form, 'error', errorMsg + details);
             } finally {
                 button.disabled = false;
                 button.textContent = button.getAttribute('data-default-' + currentLang) || 'Send Message';
