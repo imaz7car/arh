@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Assistans Runt Hörnan AB - Personlig assistans med omtanke och kvalitet för barn, vuxna och familjer i Solna.">
+    <title>Assistans Runt Hörnan AB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            line-height: 1.6;
+            color: #0f0f0f;
+            background: #fafafa;
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid #f0f0f0;
+            padding: 1.2rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #0f0f0f;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: #0f0f0f;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #1a1a1a;
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .translate-wrapper {
+            position: relative;
+        }
+
+        .translate-btn {
+            background: #0f0f0f;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 6px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .translate-btn:hover {
+            background: #333;
+        }
+
+        .translate-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            min-width: 150px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+            margin-top: 0.5rem;
+        }
+
+        .translate-menu.active {
+            display: block;
+        }
+
+        .translate-menu button {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: none;
+            border: none;
+            text-align: left;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 500;
+            transition: background 0.2s ease;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .translate-menu button:last-child {
+            border-bottom: none;
+        }
+
+        .translate-menu button:hover {
+            background: #f5f5f5;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #0f0f0f;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            border-bottom: 1px solid #e8e8e8;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-family: 'Space Mono', monospace;
+            font-size: 3.8rem;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+            font-weight: 700;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2.5rem;
+            color: #555;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .btn-primary {
+            background: #0f0f0f;
+            color: white;
+            box-shadow: 0 4px 15px rgba(15, 15, 15, 0.1);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(15, 15, 15, 0.15);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #0f0f0f;
+            border: 1.5px solid #0f0f0f;
+        }
+
+        .btn-secondary:hover {
+            background: #0f0f0f;
+            color: white;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 5rem 0;
+        }
+
+        h2 {
+            font-family: 'Space Mono', monospace;
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            color: #0f0f0f;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 3rem;
+            max-width: 700px;
+            font-weight: 300;
+        }
+
+        #about {
+            background: white;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .about-text h3 {
+            color: #0f0f0f;
+            margin: 2rem 0 0.8rem 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: #555;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            background: #f5f5f5;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            border: 1px solid #e8e8e8;
+        }
+
+        .highlight h3 {
+            color: #0f0f0f;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight ol {
+            padding-left: 1.5rem;
+        }
+
+        .highlight ol li {
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        #services {
+            background: #fafafa;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid #e8e8e8;
+            border-radius: 12px;
+            padding: 2.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            border-color: #0f0f0f;
+        }
+
+        .service-label {
+            display: inline-block;
+            background: #e8e8e8;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #0f0f0f;
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            color: #0f0f0f;
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        #why-us {
+            background: white;
+        }
+
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .why-us-card {
+            text-align: center;
+            padding: 2rem;
+            background: #f5f5f5;
+            border-radius: 12px;
+            border: 1px solid #e8e8e8;
+        }
+
+        .why-us-card .number {
+            font-family: 'Space Mono', monospace;
+            font-size: 3.2rem;
+            color: #0f0f0f;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .why-us-card h3 {
+            color: #0f0f0f;
+            margin: 1rem 0;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .why-us-card p {
+            color: #666;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        #contact {
+            background: #0f0f0f;
+            color: white;
+        }
+
+        #contact h2 {
+            color: white;
+        }
+
+        #contact .section-subtitle {
+            color: #aaa;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info div {
+            margin-bottom: 2rem;
+        }
+
+        .contact-info h3 {
+            color: white;
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .contact-info p {
+            opacity: 0.85;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            opacity: 0.7;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #333;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.95rem;
+            background: #1a1a1a;
+            color: white;
+            font-weight: 300;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #777;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+            min-height: 140px;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #555;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            color: #0f0f0f;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.15);
+        }
+
+        .languages {
+            background: #f5f5f5;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-top: 3rem;
+            text-align: center;
+            border: 1px solid #e8e8e8;
+        }
+
+        .languages h3 {
+            color: #0f0f0f;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .language-badges {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .language-badge {
+            background: white;
+            color: #0f0f0f;
+            padding: 0.6rem 1.2rem;
+            border-radius: 20px;
+            font-weight: 600;
+            border: 1px solid #e0e0e0;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid #333;
+        }
+
+        footer p {
+            margin-bottom: 0.8rem;
+            font-weight: 300;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                position: absolute;
+                top: 70px;
+                right: 0;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                padding: 1.5rem;
+                border-bottom: 1px solid #e8e8e8;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .header-right {
+                gap: 1rem;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">ARH</div>
+            <div class="header-right">
+                <nav>
+                    <a href="#about" data-sv="Om Oss" data-en="About" data-es="Acerca de" data-ar="معلومات">Om Oss</a>
+                    <a href="#services" data-sv="Tjänster" data-en="Services" data-es="Servicios" data-ar="الخدمات">Tjänster</a>
+                    <a href="#why-us" data-sv="Varför Vi" data-en="Why Us" data-es="Por Qué" data-ar="لماذا نحن">Varför Vi</a>
+                    <a href="#contact" data-sv="Kontakt" data-en="Contact" data-es="Contacto" data-ar="اتصل">Kontakt</a>
+                </nav>
+                <div class="translate-wrapper">
+                    <button class="translate-btn" onclick="toggleTranslateMenu()">Translate</button>
+                    <div class="translate-menu" id="translateMenu">
+                        <button onclick="changeLanguage('sv')">Svenska</button>
+                        <button onclick="changeLanguage('en')">English</button>
+                        <button onclick="changeLanguage('es')">Español</button>
+                        <button onclick="changeLanguage('ar')">العربية</button>
+                    </div>
+                </div>
+                <button class="mobile-menu-btn" onclick="toggleMenu()">Menu</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 data-sv="Personlig Assistans Med Omtanke" data-en="Personal Care With Dignity" data-es="Cuidado Personal Con Dignidad" data-ar="الرعاية الشخصية بكرامة">Personlig Assistans Med Omtanke</h1>
+            <p data-sv="Skräddarsydd assistans för barn, vuxna och familjer. Vi fokuserar på att ge det stöd och den värdighet du förtjänar." data-en="Tailored assistance for children, adults and families. We focus on giving you the support and dignity you deserve." data-es="Asistencia personalizada para niños, adultos y familias. Nos enfocamos en brindarle el apoyo y la dignidad que merece." data-ar="مساعدة مخصصة للأطفال والبالغين والعائلات. نركز على إعطائك الدعم والكرامة التي تستحقها.">Skräddarsydd assistans för barn, vuxna och familjer. Vi fokuserar på att ge det stöd och den värdighet du förtjänar.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="scrollTo('contact')" data-sv="Kontakta Oss" data-en="Contact Us" data-es="Contáctenos" data-ar="اتصل بنا">Kontakta Oss</button>
+                <button class="btn btn-secondary" onclick="scrollTo('services')" data-sv="Våra Tjänster" data-en="Our Services" data-es="Nuestros Servicios" data-ar="خدماتنا">Våra Tjänster</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 data-sv="Om Assistans Runt Hörnan AB" data-en="About Assistans Runt Hörnan AB" data-es="Acerca de Assistans Runt Hörnan AB" data-ar="حول Assistans Runt Hörnan AB">Om Assistans Runt Hörnan AB</h2>
+        <p class="section-subtitle" data-sv="Sedan 2010 hjälper vi familjer att leva ett självständigt och värdigt liv" data-en="Since 2010, we help families live an independent and dignified life" data-es="Desde 2010, ayudamos a las familias a vivir una vida independiente y digna" data-ar="منذ عام 2010، نساعد العائلات على العيش بحياة مستقلة وكريمة">Sedan 2010 hjälper vi familjer att leva ett självständigt och värdigt liv</p>
+        
+        <div class="about-content">
+            <div class="about-text">
+                <h3 data-sv="Vår Mission" data-en="Our Mission" data-es="Nuestra Misión" data-ar="مهمتنا">Vår Mission</h3>
+                <p data-sv="Vi erbjuder mänsklig, tydlig och lättillgänglig omvårdnad för barn, vuxna och familjer med funktionshinder. Varje individ är unik, och vi anpassar vår assistans efter dina specifika behov och önskemål." data-en="We provide human, clear and accessible care for children, adults and families with disabilities. Each individual is unique, and we tailor our assistance to your specific needs and wishes." data-es="Proporcionamos cuidado humano, claro y accesible para niños, adultos y familias con discapacidades. Cada individuo es único, y adaptamos nuestra asistencia a sus necesidades y deseos específicos." data-ar="نحن نقدم رعاية إنسانية وواضحة وسهلة الوصول للأطفال والبالغين والعائلات ذوي الإعاقة. كل فرد فريد من نوعه، ونحن نتكيف مساعدتنا مع احتياجاتك ورغباتك المحددة.">Vi erbjuder mänsklig, tydlig och lättillgänglig omvårdnad för barn, vuxna och familjer med funktionshinder. Varje individ är unik, och vi anpassar vår assistans efter dina specifika behov och önskemål.</p>
+                
+                <h3 data-sv="Vår Vision" data-en="Our Vision" data-es="Nuestra Visión" data-ar="رؤيتنا">Vår Vision</h3>
+                <p data-sv="Vi tror att alla människor förtjänar värdighet, självständighet och möjlighet att leva det liv de önskar. Vår assistans är inte bara hjälp. Det är ett partnerskap för ett bättre liv." data-en="We believe that everyone deserves dignity, independence and the opportunity to live the life they want. Our assistance is not just help. It is a partnership for a better life." data-es="Creemos que todos merecen dignidad, independencia y la oportunidad de vivir la vida que desean. Nuestra asistencia no es solo ayuda. Es una asociación para una vida mejor." data-ar="نحن نؤمن بأن الجميع يستحقون الكرامة والاستقلالية والفرصة للعيش كما يريدون. مساعدتنا ليست مجرد مساعدة. إنها شراكة من أجل حياة أفضل.">Vi tror att alla människor förtjänar värdighet, självständighet och möjlighet att leva det liv de önskar. Vår assistans är inte bara hjälp. Det är ett partnerskap för ett bättre liv.</p>
+                
+                <h3 data-sv="Etablerad Sedan 2010" data-en="Established Since 2010" data-es="Establecido Desde 2010" data-ar="تم التأسيس منذ عام 2010">Etablerad Sedan 2010</h3>
+                <p>
+                    <strong data-sv="Företagsform:" data-en="Legal Form:" data-es="Forma Legal:" data-ar="الشكل القانوني:">Företagsform:</strong> Aktiebolag (AB)<br>
+                    <strong data-sv="F-skatteregistrerad:" data-en="Tax Registered:" data-es="Registrado Fiscalmente:" data-ar="مسجل ضريبياً:">F-skatteregistrerad:</strong> 15 april 2010<br>
+                    <strong data-sv="Huvudkontor:" data-en="Headquarters:" data-es="Sede:" data-ar="المقر الرئيسي:">Huvudkontor:</strong> Tvärvägen 5, 169 36 Solna, Sverige
+                </p>
+            </div>
+
+            <div>
+                <div class="highlight">
+                    <h3 data-sv="Vad Gör Oss Annorlunda?" data-en="What Sets Us Apart?" data-es="¿Qué Nos Hace Diferentes?" data-ar="ما يجعلنا مختلفين؟">Vad Gör Oss Annorlunda?</h3>
+                    <ol>
+                        <li data-sv="Över 15 års erfarenhet av personlig assistans" data-en="Over 15 years of experience in personal assistance" data-es="Más de 15 años de experiencia en asistencia personal" data-ar="أكثر من 15 سنة من الخبرة في المساعدة الشخصية">Över 15 års erfarenhet av personlig assistans</li>
+                        <li data-sv="24/7 dygnet-runt stöd vid nödsituationer" data-en="24/7 emergency support available" data-es="Apoyo de emergencia disponible 24/7" data-ar="دعم الطوارئ متاح 24/7">24/7 dygnet-runt stöd vid nödsituationer</li>
+                        <li data-sv="Skräddarsydd assistans efter dina behov" data-en="Customized assistance to your needs" data-es="Asistencia personalizada según sus necesidades" data-ar="مساعدة مخصصة وفقاً لاحتياجاتك">Skräddarsydd assistans efter dina behov</li>
+                        <li data-sv="Flerspråkig support: Svenska, Engelska, Spanska, Arabiska" data-en="Multilingual support: Swedish, English, Spanish, Arabic" data-es="Soporte multilingüe: sueco, inglés, español, árabe" data-ar="دعم متعدد اللغات: السويدية والإنجليزية والإسبانية والعربية">Flerspråkig support: Svenska, Engelska, Spanska, Arabiska</li>
+                        <li data-sv="Erfaren team som bryr sig om dig" data-en="Experienced team dedicated to your care" data-es="Equipo experimentado dedicado a su cuidado" data-ar="فريق ذو خبرة مكرس لرعايتك">Erfaren team som bryr sig om dig</li>
+                        <li data-sv="Fokus på värdighet och självständighet" data-en="Focus on dignity and independence" data-es="Enfoque en dignidad e independencia" data-ar="التركيز على الكرامة والاستقلالية">Fokus på värdighet och självständighet</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="container">
+        <h2 data-sv="Våra Tjänster" data-en="Our Services" data-es="Nuestros Servicios" data-ar="خدماتنا">Våra Tjänster</h2>
+        <p class="section-subtitle" data-sv="Vi erbjuder ett komplett spektrum av personlig assistans anpassad efter dina behov" data-en="We offer a complete range of personal assistance tailored to your needs" data-es="Ofrecemos una gama completa de asistencia personal adaptada a sus necesidades" data-ar="نحن نقدم مجموعة كاملة من المساعدة الشخصية المخصصة لاحتياجاتك">Vi erbjuder ett komplett spektrum av personlig assistans anpassad efter dina behov</p>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <span class="service-label" data-sv="Dagligt Stöd" data-en="Daily Support" data-es="Apoyo Diario" data-ar="الدعم اليومي">Dagligt Stöd</span>
+                <h3 data-sv="Personlig Assistans" data-en="Personal Assistance" data-es="Asistencia Personal" data-ar="مساعدة شخصية">Personlig Assistans</h3>
+                <p data-sv="Stöd med dagliga uppgifter, personlig hygien, kläder och aktiviteter som hjälper dig att behålla självständighet och värdighet." data-en="Support with daily tasks, personal hygiene, clothing and activities to help you maintain independence and dignity." data-es="Apoyo con tareas diarias, higiene personal, ropa y actividades para ayudarlo a mantener la independencia y la dignidad." data-ar="الدعم في المهام اليومية والنظافة الشخصية والملابس والأنشطة التي تساعدك على الحفاظ على الاستقلالية والكرامة.">Stöd med dagliga uppgifter, personlig hygien, kläder och aktiviteter som hjälper dig att behålla självständighet och värdighet.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-label" data-sv="Hemvård" data-en="Home Care" data-es="Cuidado del Hogar" data-ar="رعاية المنزل">Hemvård</span>
+                <h3 data-sv="Hushållsarbete" data-en="Household Work" data-es="Tareas del Hogar" data-ar="أعمال منزلية">Hushållsarbete</h3>
+                <p data-sv="Städning, tvätt, organisering och ordning hemma för att skapa en trygg och vacker miljö för dig och din familj." data-en="Cleaning, laundry, organization and tidiness at home to create a safe and beautiful environment for you and your family." data-es="Limpieza, lavandería, organización y orden en el hogar para crear un ambiente seguro y hermoso para usted y su familia." data-ar="التنظيف والغسيل والتنظيم والترتيب في المنزل لخلق بيئة آمنة وجميلة لك ولعائلتك.">Städning, tvätt, organisering och ordning hemma för att skapa en trygg och vacker miljö för dig och din familj.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-label" data-sv="Sällskap" data-en="Companionship" data-es="Compañía" data-ar="الرفقة">Sällskap</span>
+                <h3 data-sv="Sällskap & Socialt Stöd" data-en="Companionship & Social Support" data-es="Compañía y Apoyo Social" data-ar="الرفقة والدعم الاجتماعي">Sällskap & Socialt Stöd</h3>
+                <p data-sv="Bygga meningsfulla relationer genom samtal, aktiviteter och emotionell support som förbättrar livskvaliteten." data-en="Build meaningful relationships through conversation, activities and emotional support that improves quality of life." data-es="Construir relaciones significativas a través de conversación, actividades y apoyo emocional que mejora la calidad de vida." data-ar="بناء علاقات ذات معنى من خلال المحادثة والأنشطة والدعم العاطفي الذي يحسن من جودة الحياة.">Bygga meningsfulla relationer genom samtal, aktiviteter och emotionell support som förbättrar livskvaliteten.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-label" data-sv="Kommunikation" data-en="Communication" data-es="Comunicación" data-ar="التواصل">Kommunikation</span>
+                <h3 data-sv="Språklig Tillgänglighet" data-en="Language Accessibility" data-es="Accesibilidad del Idioma" data-ar="إمكانية الوصول إلى اللغة">Språklig Tillgänglighet</h3>
+                <p data-sv="Vi kommunicerar flytande på Svenska, Engelska, Spanska och Arabiska för att säkerställa total förståelse och inkludering." data-en="We communicate fluently in Swedish, English, Spanish and Arabic to ensure complete understanding and inclusion." data-es="Nos comunicamos con fluidez en sueco, inglés, español y árabe para garantizar una comprensión e inclusión total." data-ar="نحن نتواصل بطلاقة باللغة السويدية والإنجليزية والإسبانية والعربية لضمان الفهم والشمول الكامل.">Vi kommunicerar flytande på Svenska, Engelska, Spanska och Arabiska för att säkerställa total förståelse och inkludering.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-label" data-sv="Nödsituationer" data-en="Emergency" data-es="Emergencia" data-ar="حالة الطوارئ">Nödsituationer</span>
+                <h3 data-sv="24/7 Stöd" data-en="24/7 Support" data-es="Soporte 24/7" data-ar="دعم 24/7">24/7 Stöd</h3>
+                <p data-sv="Kontoret är öppet mån-fre 08:00-17:00, men vi har nödhantering tillgänglig dygnet runt för brådskande situationer." data-en="Office open Monday to Friday 08:00 to 17:00, but we have emergency handling available 24/7 for urgent situations." data-es="Oficina abierta de lunes a viernes de 08:00 a 17:00, pero tenemos manejo de emergencias disponible 24/7 para situaciones urgentes." data-ar="المكتب مفتوح من الاثنين إلى الجمعة من 08:00 إلى 17:00، لكن لدينا معالجة طوارئ متاحة 24/7 للحالات العاجلة.">Kontoret är öppet mån-fre 08:00-17:00, men vi har nödhantering tillgänglig dygnet runt för brådskande situationer.</p>
+            </div>
+
+            <div class="service-card">
+                <span class="service-label" data-sv="Måltider" data-en="Meals" data-es="Comidas" data-ar="الوجبات">Måltider</span>
+                <h3 data-sv="Måltidsförberedelser" data-en="Meal Preparation" data-es="Preparación de Comidas" data-ar="تحضير الوجبات">Måltidsförberedelser</h3>
+                <p data-sv="Hjälp med kostplanering, matinköp, matlagning och näringsväg ledning efter dina speciella önskemål och behov." data-en="Help with meal planning, grocery shopping, cooking and nutritional guidance based on your special wishes and needs." data-es="Ayuda con planificación de comidas, compras de alimentos, cocina y orientación nutricional según sus deseos y necesidades especiales." data-ar="مساعدة في التخطيط الغذائي والتسوق البقالي والطهي والإرشادات الغذائية بناءً على رغباتك واحتياجاتك الخاصة.">Hjälp med kostplanering, matinköp, matlagning och näringsväg ledning efter dina speciella önskemål och behov.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-us" class="container">
+        <h2 data-sv="Varför Välja Oss" data-en="Why Choose Us" data-es="Por Qué Elegirnos" data-ar="لماذا اختيارنا">Varför Välja Oss</h2>
+        <p class="section-subtitle" data-sv="Det som skiljer oss från andra assistansbolag" data-en="What sets us apart from other assistance companies" data-es="Lo que nos diferencia de otras empresas de asistencia" data-ar="ما يجعلنا مختلفين عن شركات المساعدة الأخرى">Det som skiljer oss från andra assistansbolag</p>
+        
+        <div class="why-us-grid">
+            <div class="why-us-card">
+                <div class="number">15+</div>
+                <h3 data-sv="År Erfarenhet" data-en="Years Experience" data-es="Años de Experiencia" data-ar="سنوات الخبرة">År Erfarenhet</h3>
+                <p data-sv="Sedan 2010 har vi utvecklat expertis inom personlig assistans för att ge bästa möjliga stöd." data-en="Since 2010, we have developed expertise in personal assistance to provide the best possible support." data-es="Desde 2010, hemos desarrollado experiencia en asistencia personal para brindar el mejor apoyo posible." data-ar="منذ عام 2010، طورنا خبرة في المساعدة الشخصية لتقديم أفضل دعم ممكن.">Sedan 2010 har vi utvecklat expertis inom personlig assistans för att ge bästa möjliga stöd.</p>
+            </div>
+
+            <div class="why-us-card">
+                <div class="number">100%</div>
+                <h3 data-sv="Personlig Fokus" data-en="Personal Focus" data-es="Enfoque Personal" data-ar="تركيز شخصي">Personlig Fokus</h3>
+                <p data-sv="Varje plan är skräddarsydd till dina unika behov. Vi lyssnar, förstår och anpassar oss efter dig." data-en="Every plan is tailored to your unique needs. We listen, understand and adapt to you." data-es="Cada plan se personaliza según sus necesidades únicas. Escuchamos, entendemos y nos adaptamos a usted." data-ar="كل خطة مخصصة لاحتياجاتك الفريدة. نحن نستمع ونفهم ونتكيف معك.">Varje plan är skräddarsydd till dina unika behov. Vi lyssnar, förstår och anpassar oss efter dig.</p>
+            </div>
+
+            <div class="why-us-card">
+                <div class="number">4</div>
+                <h3 data-sv="Språk" data-en="Languages" data-es="Idiomas" data-ar="اللغات">Språk</h3>
+                <p data-sv="Svenska, Engelska, Spanska och Arabiska. Vi säkerställer att språk aldrig är ett hinder." data-en="Swedish, English, Spanish and Arabic. We ensure language is never a barrier." data-es="Sueco, inglés, español y árabe. Aseguramos que el idioma nunca sea una barrera." data-ar="السويدية والإنجليزية والإسبانية والعربية. نحن نضمن أن اللغة لا تكون عائقاً أبداً.">Svenska, Engelska, Spanska och Arabiska. Vi säkerställer att språk aldrig är ett hinder.</p>
+            </div>
+
+            <div class="why-us-card">
+                <div class="number">24/7</div>
+                <h3 data-sv="Nödsupport" data-en="Emergency Support" data-es="Apoyo de Emergencia" data-ar="دعم الطوارئ">Nödsupport</h3>
+                <p data-sv="Vi är alltid här när du behöver oss mest, dygnet runt, alla dagar i veckan." data-en="We are always here when you need us most, 24 hours a day, 7 days a week." data-es="Siempre estamos aquí cuando más nos necesitas, 24 horas al día, 7 días a la semana." data-ar="نحن هنا دائماً عندما تحتاجنا أكثر، 24 ساعة في اليوم، 7 أيام في الأسبوع.">Vi är alltid här när du behöver oss mest, dygnet runt, alla dagar i veckan.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 data-sv="Kontakta Oss Idag" data-en="Contact Us Today" data-es="Contáctenos Hoy" data-ar="اتصل بنا اليوم">Kontakta Oss Idag</h2>
+            <p class="section-subtitle" data-sv="Vi är här för att svara på dina frågor och diskutera hur vi kan hjälpa dig eller din familj" data-en="We are here to answer your questions and discuss how we can help you or your family" data-es="Estamos aquí para responder sus preguntas y discutir cómo podemos ayudarlo a usted o a su familia" data-ar="نحن هنا للإجابة على أسئلتك ومناقشة كيف يمكننا مساعدتك أو عائلتك">Vi är här för att svara på dina frågor och diskutera hur vi kan hjälpa dig eller din familj</p>
+            
+            <div class="contact-container">
+                <div class="contact-info">
+                    <div>
+                        <h3 data-sv="Besöksadress" data-en="Visiting Address" data-es="Dirección de Visita" data-ar="عنوان الزيارة">Besöksadress</h3>
+                        <p>Tvärvägen 5<br>169 36 Solna<br>Sverige</p>
+                    </div>
+
+                    <div>
+                        <h3 data-sv="Telefon" data-en="Phone" data-es="Teléfono" data-ar="الهاتف">Telefon</h3>
+                        <p><a href="tel:+46876019031">+46 8 760 19 31</a></p>
+                    </div>
+
+                    <div>
+                        <h3 data-sv="E-post" data-en="Email" data-es="Correo Electrónico" data-ar="البريد الإلكتروني">E-post</h3>
+                        <p><a href="mailto:info@assistans-r-h.se">info@assistans-r-h.se</a></p>
+                    </div>
+
+                    <div>
+                        <h3 data-sv="Webbplats" data-en="Website" data-es="Sitio Web" data-ar="الموقع الإلكتروني">Webbplats</h3>
+                        <p><a href="https://assistans-r-h.se" target="_blank">assistans-r-h.se</a></p>
+                    </div>
+
+                    <div>
+                        <h3 data-sv="Öppettider" data-en="Opening Hours" data-es="Horario de Atención" data-ar="ساعات العمل">Öppettider</h3>
+                        <p data-sv="Mån-Fre: 08:00 - 17:00 Nödsupport: 24/7" data-en="Mon-Fri: 08:00 - 17:00 Emergency Support: 24/7" data-es="Lun-Vie: 08:00 - 17:00 Apoyo de Emergencia: 24/7" data-ar="الإثنين إلى الجمعة: 08:00 - 17:00 دعم الطوارئ: 24/7">Mån-Fre: 08:00 - 17:00 Nödsupport: 24/7</p>
+                    </div>
+                </div>
+
+                <form class="contact-form" onsubmit="handleSubmit(event)">
+                    <input type="text" placeholder="Ditt namn" data-sv="Ditt namn" data-en="Your name" data-es="Tu nombre" data-ar="اسمك" required>
+                    <input type="email" placeholder="Din e-post" data-sv="Din e-post" data-en="Your email" data-es="Tu correo electrónico" data-ar="بريدك الإلكتروني" required>
+                    <input type="tel" placeholder="Din telefon" data-sv="Din telefon" data-en="Your phone" data-es="Tu teléfono" data-ar="هاتفك">
+                    <textarea placeholder="Berätta om dina behov..." data-sv="Berätta om dina behov..." data-en="Tell us about your needs..." data-es="Cuéntanos sobre tus necesidades..." data-ar="أخبرنا عن احتياجاتك..."></textarea>
+                    <button type="submit" data-sv="Skicka Meddelande" data-en="Send Message" data-es="Enviar Mensaje" data-ar="إرسال الرسالة">Skicka Meddelande</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p data-sv="© 2026 Assistans Runt Hörnan AB. Alla rättigheter förbehållna." data-en="© 2026 Assistans Runt Hörnan AB. All rights reserved." data-es="© 2026 Assistans Runt Hörnan AB. Todos los derechos reservados." data-ar="© 2026 Assistans Runt Hörnan AB. جميع الحقوق محفوظة.">© 2026 Assistans Runt Hörnan AB. Alla rättigheter förbehållna.</p>
+        <p data-sv="F-skatteregistrerad sedan 15 april 2010" data-en="Tax Registered Since April 15, 2010" data-es="Registrado Fiscalmente Desde el 15 de Abril de 2010" data-ar="مسجل ضريبياً منذ 15 أبريل 2010">F-skatteregistrerad sedan 15 april 2010</p>
+    </footer>
+
+    <script>
+        let currentLang = 'sv';
+
+        function toggleTranslateMenu() {
+            const menu = document.getElementById('translateMenu');
+            menu.classList.toggle('active');
+        }
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            document.querySelectorAll('[data-' + lang + ']').forEach(el => {
+                const text = el.getAttribute('data-' + lang);
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                    el.placeholder = text;
+                } else {
+                    el.textContent = text;
+                }
+            });
+
+            toggleTranslateMenu();
+        }
+
+        function toggleMenu() {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('active');
+        }
+
+        function scrollTo(section) {
+            const element = document.getElementById(section);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                const nav = document.querySelector('nav');
+                nav.classList.remove('active');
+            }
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const msg = currentLang === 'sv' ? 'Tack för ditt meddelande! Vi kontaktar dig snart.' : 
+                       currentLang === 'en' ? 'Thank you for your message! We will contact you soon.' :
+                       currentLang === 'es' ? 'Gracias por tu mensaje. Nos pondremos en contacto pronto.' :
+                       'شكراً على رسالتك! سنتصل بك قريباً.';
+            alert(msg);
+            event.target.reset();
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('translateMenu');
+            const btn = document.querySelector('.translate-btn');
+            if (!menu.contains(e.target) && !btn.contains(e.target)) {
+                menu.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
