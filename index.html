@@ -580,52 +580,266 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                overflow-x: hidden;
+            }
+
+            header {
+                padding: 0.75rem 0;
+            }
+
+            .header-container {
+                padding: 0 1rem;
+                gap: 0.75rem;
+            }
+
+            .logo img {
+                width: 132px;
+            }
+
+            .header-right {
+                gap: 0.55rem;
+            }
+
             .mobile-menu-btn {
-                display: block;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                min-height: 42px;
+                padding: 0 0.8rem;
+                border: 1px solid #d8d8d8;
+                border-radius: 8px;
+                background: white;
+                font-size: 0.92rem;
+                font-weight: 700;
             }
 
             nav {
                 display: none;
                 position: absolute;
-                top: 70px;
+                top: 100%;
+                left: 0;
                 right: 0;
                 flex-direction: column;
-                background: white;
+                gap: 0.4rem;
+                background: rgba(255, 255, 255, 0.98);
                 width: 100%;
-                padding: 1.5rem;
+                padding: 0.8rem 1rem 1rem;
                 border-bottom: 1px solid #e8e8e8;
+                box-shadow: 0 18px 30px rgba(0, 0, 0, 0.08);
             }
 
             nav.active {
                 display: flex;
             }
 
+            nav a {
+                width: 100%;
+                padding: 0.9rem 1rem;
+                border: 1px solid #eeeeee;
+                border-radius: 8px;
+                background: #fafafa;
+                font-size: 1rem;
+            }
+
+            nav a:after {
+                display: none;
+            }
+
+            .translate-btn {
+                min-height: 42px;
+                padding: 0 0.8rem;
+                font-size: 0.86rem;
+                border-radius: 8px;
+            }
+
+            .translate-menu {
+                right: 0;
+                min-width: 138px;
+            }
+
+            .translate-menu button {
+                padding: 0.95rem 1rem;
+                font-size: 0.95rem;
+            }
+
+            .hero {
+                padding: 4rem 1rem 3.5rem;
+                text-align: left;
+            }
+
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2.25rem;
+                line-height: 1.08;
+                margin-bottom: 1rem;
+                letter-spacing: 0;
             }
 
             .hero p {
-                font-size: 1rem;
+                font-size: 1.02rem;
+                line-height: 1.65;
+                margin-bottom: 1.6rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 0.75rem;
+            }
+
+            .btn {
+                width: 100%;
+                padding: 0.95rem 1rem;
+                text-align: center;
+            }
+
+            .container {
+                padding: 0 1rem;
             }
 
             .about-content {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .about-text h3 {
+                margin: 1.35rem 0 0.6rem;
+                font-size: 1.15rem;
+            }
+
+            .about-text p {
+                line-height: 1.7;
+            }
+
+            .highlight {
+                padding: 1.25rem;
+                border-radius: 8px;
+                margin: 1.25rem 0 0;
+            }
+
+            .highlight h3 {
+                margin-bottom: 1rem;
+                font-size: 1.1rem;
+            }
+
+            .highlight ol {
+                padding-left: 1.25rem;
+            }
+
+            .highlight ol li {
+                margin-bottom: 0.85rem;
+                line-height: 1.55;
+            }
+
+            .services-grid,
+            .why-us-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .service-card,
+            .why-us-card {
+                padding: 1.25rem;
+                border-radius: 8px;
+            }
+
+            .service-card:hover {
+                transform: none;
+            }
+
+            .service-label {
+                padding: 0.45rem 0.7rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .service-card h3 {
+                font-size: 1.15rem;
+            }
+
+            .service-action {
+                width: 100%;
+                padding: 0.9rem 1rem;
+                margin-top: 1rem;
+            }
+
+            .why-us-card {
+                text-align: left;
+            }
+
+            .why-us-card .number {
+                font-size: 2.35rem;
+                margin-bottom: 0.2rem;
             }
 
             .contact-container {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .contact-info {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .contact-info div {
+                margin-bottom: 0;
+                padding-bottom: 0.8rem;
+                border-bottom: 1px solid #242424;
+            }
+
+            .contact-info div:last-child {
+                border-bottom: none;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                min-height: 48px;
+                margin-bottom: 0.8rem;
+                border-radius: 8px;
+                font-size: 1rem;
             }
 
             h2 {
-                font-size: 2rem;
+                font-size: 1.85rem;
+                line-height: 1.15;
+                letter-spacing: 0;
+                overflow-wrap: anywhere;
             }
 
-            .header-right {
-                gap: 1rem;
+            .section-subtitle {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 1.6rem;
+            }
+
+            footer {
+                padding: 2rem 1rem;
             }
 
             section {
-                padding: 3rem 0;
+                padding: 3.2rem 0;
+                scroll-margin-top: 74px;
+            }
+        }
+
+        @media (max-width: 390px) {
+            .logo img {
+                width: 112px;
+            }
+
+            .translate-btn,
+            .mobile-menu-btn {
+                min-height: 40px;
+                padding: 0 0.62rem;
+                font-size: 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 1.95rem;
+            }
+
+            h2 {
+                font-size: 1.65rem;
             }
         }
     </style>
@@ -637,7 +851,7 @@
                 <img src="logo.png" alt="Assistans Runt Hörnan AB">
             </a>
             <div class="header-right">
-                <nav>
+                <nav id="siteNav">
                     <a href="#about" data-sv="Om Oss" data-en="About" data-es="Acerca de" data-ar="معلومات">Om Oss</a>
                     <a href="#services" data-sv="Tjänster" data-en="Services" data-es="Servicios" data-ar="الخدمات">Tjänster</a>
                     <a href="#why-us" data-sv="Varför Vi" data-en="Why Us" data-es="Por Qué" data-ar="لماذا نحن">Varför Vi</a>
@@ -652,7 +866,7 @@
                         <button onclick="changeLanguage('ar')">العربية</button>
                     </div>
                 </div>
-                <button class="mobile-menu-btn" onclick="toggleMenu()">Menu</button>
+                <button class="mobile-menu-btn" onclick="toggleMenu()" aria-expanded="false" aria-controls="siteNav" data-sv="Meny" data-en="Menu" data-es="Menú" data-ar="القائمة">Meny</button>
             </div>
         </div>
     </header>
@@ -857,12 +1071,33 @@
                 }
             });
 
+            updateMenuButton();
             toggleTranslateMenu();
+        }
+
+        function updateMenuButton() {
+            const nav = document.querySelector('nav');
+            const button = document.querySelector('.mobile-menu-btn');
+            if (!button) {
+                return;
+            }
+
+            const closeLabels = {
+                sv: 'Stäng',
+                en: 'Close',
+                es: 'Cerrar',
+                ar: 'إغلاق'
+            };
+            const openLabel = button.getAttribute('data-' + currentLang) || 'Menu';
+            const isOpen = nav && nav.classList.contains('active');
+            button.textContent = isOpen ? (closeLabels[currentLang] || 'Close') : openLabel;
+            button.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         }
 
         function toggleMenu() {
             const nav = document.querySelector('nav');
             nav.classList.toggle('active');
+            updateMenuButton();
         }
 
         function scrollToSection(section) {
@@ -871,6 +1106,7 @@
                 element.scrollIntoView({ behavior: 'smooth' });
                 const nav = document.querySelector('nav');
                 nav.classList.remove('active');
+                updateMenuButton();
             }
         }
 
@@ -952,6 +1188,9 @@
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth' });
+                    const nav = document.querySelector('nav');
+                    nav.classList.remove('active');
+                    updateMenuButton();
                 }
             });
         });
